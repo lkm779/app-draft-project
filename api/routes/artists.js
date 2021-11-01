@@ -1,11 +1,18 @@
 const express= require ('express');
 const router= express.Router();
+const Artist= require('../models/artist');
 
 
-router.get('/',(req,res,next)=>
-{
-    res.status(200).json({
-        message:'Artists were shown'
+router.get('/',(req,res,next)=>{
+    Artist.find().exec()
+    .then(docs=>{console.log(docs);
+    res.status(200).json(docs);
+})
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json({
+            error:err
+        });
     });
 });
 

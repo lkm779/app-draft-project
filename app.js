@@ -2,12 +2,16 @@ const express= require('express');
 const app= express();
 const morgan= require('morgan');
 const bodyParser= require('body-parser');
+const mongoose =require('mongoose');
 
 
 const trackRoutes= require('./api/routes/tracks');
-const genresRoutes= require('./api/routes/genres');
-const artistsRoutes= require('./api/routes/artists');
-const albumsRoutes= require('./api/routes/albums');
+const genreRoutes= require('./api/routes/genres');
+const artistRoutes= require('./api/routes/artists');
+const albumRoutes= require('./api/routes/albums');
+const userRoutes = require('./api/routes/user');
+
+mongoose.connect('mongodb+srv://lkm779:sR59rAUQq.kNq%G@cluster0.hw5pq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 
 app.use(morgan('short'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -26,10 +30,13 @@ app.use((req,res,next)=>{
     next();
 });
 
-app.use('/albums', albumsRoutes);
-app.use('/artists', artistsRoutes);
-app.use('/genres', genresRoutes);
+//POTENTIAL ROUTES TO HANDLE REQUESTS
+
+app.use('/albums', albumRoutes);
+app.use('/artists', artistRoutes);
+app.use('/genres', genreRoutes);
 app.use('/tracks', trackRoutes);
+app.use('/user', userRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
