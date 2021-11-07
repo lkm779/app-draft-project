@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt= require('jsonwebtoken');
 
 const User = require("../models/user");
-const { token } = require("morgan");
+
 
 
 router.post("/signup", (req, res, next) => {
@@ -60,12 +60,13 @@ router.post('/login',(req,res,next)=>{
             }, process.env.JWT_KEY, 
             );
             return res.status(200).json({
-                message:' Authorization successful'
+                message:' Authorization successful',
+                token:token
             });
         }
         res.status(401).json({
             message:'Authorization failed',
-            token:token
+            
         });
     });
 })

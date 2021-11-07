@@ -3,6 +3,7 @@ const router= express.Router();
 const mongoose= require('mongoose');
 const checkAuth= require('../middleware/check-auth');
 
+
 const Track= require('../models/track');
 const Album= require('../models/album');
 const Genre= require('../models/genre');
@@ -13,7 +14,7 @@ router.get('/',(req,res,next)=>{
     .then(docs=>{console.log(docs);
     res.status(200).json(docs);
 })
-    .catch(err=>{
+.catch(err=>{
         console.log(err);
         res.status(500).json({
             error:err
@@ -32,6 +33,7 @@ router.post('/', checkAuth, (req,res,next)=>{
         composer:req.body.composer,
         duration:req.body.duration,
         size:req.body.size,
+        milliseconds:req.body.milliseconds,
        
 
     });
@@ -50,7 +52,7 @@ router.post('/', checkAuth, (req,res,next)=>{
     });
 
 
-router.get('/:trackId', checkAuth, (req,res,next)=>{
+router.get('/:trackId', (req,res,next)=>{
 const id=req.params.trackId;
 Track.findById(id)
 .exec()

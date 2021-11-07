@@ -1,14 +1,15 @@
 const express= require ('express');
 const router= express.Router();
 const Artist= require('../models/artist');
+const checkAuth= require('../middleware/check-auth');
 
-
-router.get('/',(req,res,next)=>{
+router.get('/',checkAuth, (req,res,next)=>{
     Artist.find().exec()
     .then(docs=>{console.log(docs);
     res.status(200).json(docs);
 })
-    .catch(err=>{
+
+ .catch(err=>{
         console.log(err);
         res.status(500).json({
             error:err
@@ -16,7 +17,7 @@ router.get('/',(req,res,next)=>{
     });
 });
 
-router.get('/:artistId',(req,res,next)=>{
+router.get('/:artistId', checkAuth, (req,res,next)=>{
    const id=req.params.artistId;
    if (id==='unique'){
    res.status(200).json({

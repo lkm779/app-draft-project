@@ -5,13 +5,15 @@ const bodyParser= require('body-parser');
 const mongoose =require('mongoose');
 
 
+mongoose.connect('mongodb+srv://lkm779:1234.@cluster0.hw5pq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+
 const trackRoutes= require('./api/routes/tracks');
 const genreRoutes= require('./api/routes/genres');
 const artistRoutes= require('./api/routes/artists');
 const albumRoutes= require('./api/routes/albums');
 const userRoutes = require('./api/routes/user');
 
-mongoose.connect('mongodb+srv://lkm779:sR59rAUQq.kNq%G@cluster0.hw5pq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+
 
 app.use(morgan('short'));
 app.use(bodyParser.urlencoded({extended: false}));

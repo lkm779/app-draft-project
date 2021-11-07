@@ -1,8 +1,7 @@
 const mongoose=require('mongoose');
 
 
-const trackSchema= mongoose.Schema({
-    _id:mongoose.Schema.Types.ObjectId,
+const trackSchema= new mongoose.Schema({
     album: {type:mongoose.Schema.Types.ObjectId, ref: 'Album',required: true},
     genre:{type:mongoose.Schema.Types.ObjectId, ref: 'Genre', require: true},
     name: String,
@@ -10,6 +9,7 @@ const trackSchema= mongoose.Schema({
     duration: Number,
     size: Number,
     price: Number,
+    milliseconds: Number,
 });
 
 module.exports= mongoose.model('Track', trackSchema)

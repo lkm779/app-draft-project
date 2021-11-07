@@ -1,8 +1,7 @@
 const mongoose=require('mongoose');
 
 
-const artistSchema= mongoose.Schema({
-    _id:mongoose.Schema.Types.ObjectId,
+const artistSchema= new mongoose.Schema({
     name: String,
     id: Number,
 });
