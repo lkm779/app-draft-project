@@ -3,9 +3,37 @@ const app= express();
 const morgan= require('morgan');
 const bodyParser= require('body-parser');
 const mongoose =require('mongoose');
+const swaggerUi= require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 
-mongoose.connect('mongodb+srv://lkm779:1234.@cluster0.hw5pq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+const options = {
+    explorer: true
+  };
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
+
+
+
+const url = 'mongodb://127.0.0.1:27017/import_db'
+
+
+
+
+
+const MONGODB_URI='mongodb+srv://lkm779:1234.@cluster0.hw5pq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+mongoose.connect(url|| MONGODB_URI , {
+    useNewUrlParser: true,
+    useUnifiedTopology:true
+});
+
+const db = mongoose.connection;
+
+mongoose.connection.on('connected',  ()=>{
+    console.log('Mongoose is conected!!!');
+});
 
 const trackRoutes= require('./api/routes/tracks');
 const genreRoutes= require('./api/routes/genres');
