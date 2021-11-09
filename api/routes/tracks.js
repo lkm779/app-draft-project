@@ -25,9 +25,8 @@ router.get('/',(req,res,next)=>{
 
 router.post('/', checkAuth, (req,res,next)=>{
         const track= new Track({
-        _id: new mongoose.Types.ObjectId(),
-        album: req.body.albumId,
-        genre:req.body.genreId,
+        album: req.body.album,
+        genre:req.body.genre,
         name: req.body.name,
         price:req.body.price,
         composer:req.body.composer,
@@ -51,20 +50,6 @@ router.post('/', checkAuth, (req,res,next)=>{
     
     });
 
-
-router.get('/:trackId', (req,res,next)=>{
-const id=req.params.trackId;
-Track.findById(id)
-.exec()
-.then(doc=>{
-    console.log("From database", doc);
-    res.status(200).json(doc);
-})
-.catch(err=> 
-    console.log(err));
-    res.status(500).json({error:err});
-
-});
 });
 
 module.exports=router;

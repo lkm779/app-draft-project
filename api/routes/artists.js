@@ -17,21 +17,6 @@ router.get('/',checkAuth, (req,res,next)=>{
     });
 });
 
-router.get('/:artistId', checkAuth, (req,res,next)=>{
-   const id=req.params.artistId;
-   if (id==='unique'){
-   res.status(200).json({
-        message:'Artist ID',
-        id:id
-
-    });
-   }
-   else{
-       res.status('200').json({
-           message: 'You have a passed an artist Id'
-       });
-    }
-});
 
 module.exports= router;
 

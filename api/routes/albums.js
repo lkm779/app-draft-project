@@ -20,21 +20,6 @@ router.get('/', checkAuth, (req, res, next)=>{
     
 });
 
-    router.get('/:albumId', checkAuth, (req, res, next)=>{
-        const id=req.params.albumId;
-        if (id==='unique'){
-            res.status(200).json({
-                message:'Album ID',
-                id:id
-            });
-        }else {
-                res.status(200).json({
-                    message:'You have passed an album ID'
-                });
-            }
-        
-        });
-        
         
         module.exports=router;
 
